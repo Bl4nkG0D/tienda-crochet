@@ -101,19 +101,14 @@
         </div>
       `;
 
-            // Guardar en productos vistos recientemente
             let vistos = JSON.parse(localStorage.getItem("vistos")) || [];
 
-            // Eliminar si ya estaba (por ID único o título si no tienes ID)
             vistos = vistos.filter(p => p.titulo !== producto.titulo);
 
-            // Agregar el nuevo al principio
             vistos.unshift(producto);
 
-            // Limitar a los últimos 10
             vistos = vistos.slice(0, 10);
 
-            // Guardar de nuevo
             localStorage.setItem("vistos", JSON.stringify(vistos));
 
         } else {

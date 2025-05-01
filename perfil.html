@@ -85,7 +85,6 @@
     </div>
 
     <script>
-        // Cargar y mostrar favoritos
         const favoritosContainer = document.getElementById("favoritosContainer");
         let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
@@ -128,7 +127,6 @@
 
         renderFavoritos();
 
-        // Actualizar contador del carrito
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         const cartCount = document.getElementById('cart-count');
         if (cartCount) {

@@ -53,7 +53,6 @@
 
         .ver-articulo {
             background-color: #FFFF13;
-            /* naranja */
             border-color: #FFFF13;
             color: black;
         }
@@ -153,7 +152,6 @@
     </div>
 
 
-    <!-- Vistos recientemente -->
     <div class="container mt-5">
         <h4>Vistos recientemente</h4>
         <div class="slider-container">
@@ -170,7 +168,6 @@
             container.scrollLeft += direction * scrollAmount;
         }
 
-        // Mostrar productos vistos recientemente
         function mostrarVistos() {
             const container = document.getElementById('recentScroll');
             const vistos = JSON.parse(localStorage.getItem("vistos")) || [];
