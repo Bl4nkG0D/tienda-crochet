@@ -1,0 +1,153 @@
+<!-- navidad.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Categoría Navidad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-img-top {
+            object-fit: cover;
+            height: 200px;
+        }
+
+        body {
+            background-color: #E292E5;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .favorite-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        .favorite-btn.red {
+            color: red;
+        }
+
+        .card {
+            border-color: black;
+            border-width: 0.050cm;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="gghdbh.jpg" alt="Logo" height="40" class="me-2">
+                Crochetlandia
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="animales.html">Animales</a></li>
+                            <li><a class="dropdown-item" href="halloween.html">Halloween</a></li>
+                            <li><a class="dropdown-item" href="navidad.html">Navidad</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="todasCat.html">Ver todas las categorías</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="carrito.html">
+                            🛒 Carrito
+                            <span id="cart-count"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h2 class="mb-4">Navidad</h2>
+        <div id="productosContainer" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"></div>
+    </div>
+
+    <script>
+        const productos = [
+            { id: 1, imagen: 'navidad/elfo01.jpg', titulo: 'Elfo 01', precio: '10' },
+            { id: 2, imagen: 'navidad/reno02.jpg', titulo: 'Reno 02', precio: '20' },
+            { id: 3, imagen: 'navidad/reno01.jpg', titulo: 'Reno 01', precio: '5' },
+            { id: 4, imagen: 'navidad/santa01.jpg', titulo: 'Santa Claus 01', precio: '40' },
+            { id: 5, imagen: 'navidad/santa02.jpg', titulo: 'Santa Claus 02', precio: '14' }
+        ];
+
+        const contenedor = document.getElementById('productosContainer');
+        const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+        productos.forEach((producto, index) => {
+            const esFavorito = favoritos.some(p => p.id === producto.id);
+            const card = document.createElement('div');
+            card.className = 'col';
+            card.innerHTML = `
+        <div class="card h-100 position-relative">
+          <img src="${producto.imagen}" class="card-img-top" alt="${producto.titulo}" style="cursor:pointer" onclick="verProducto(${index})">
+          <div class="card-body">
+            <h5 class="card-title">${producto.titulo}</h5>
+            <p class="card-text">$${producto.precio} MXN</p>
+          </div>
+          <button class="favorite-btn position-absolute top-0 end-0 m-2 ${esFavorito ? 'red' : ''}" onclick="toggleFavorito(this, ${producto.id})">
+            &hearts;
+          </button>
+        </div>
+      `;
+            contenedor.appendChild(card);
+        });
+
+        function verProducto(index) {
+            localStorage.setItem("producto", JSON.stringify(productos[index]));
+            window.location.href = "../producto.html";
+        }
+
+        function toggleFavorito(btn, id) {
+            let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+            const producto = productos.find(p => p.id === id);
+            const index = favoritos.findIndex(p => p.id === id);
+
+            if (index > -1) {
+                favoritos.splice(index, 1); // quitar
+                btn.classList.remove("red");
+            } else {
+                favoritos.push(producto); // agregar
+                btn.classList.add("red");
+            }
+
+            localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        }
+
+        // Actualiza el contador del carrito
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        const cartCount = document.getElementById('cart-count');
+        if (cartCount) {
+            cartCount.textContent = carrito.length;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

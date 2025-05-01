@@ -8,15 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        /* Mostrar dropdown al hacer hover */
-        body{
+        body {
             background-color: #E292E5;
         }
+
         .dropdown:hover .dropdown-menu {
             display: block;
         }
 
-        /* Slider estilo básico */
         .recent-items {
             display: flex;
             overflow-x: auto;
@@ -51,104 +50,115 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .ver-articulo {
+            background-color: #FFFF13;
+            /* naranja */
+            border-color: #FFFF13;
+            color: black;
+        }
+
+        .card {
+            width: 5rem;
+            height: 100%;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-color: black;
+            border-width: 0.050cm;
+        }
+
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 3.6em;
+            line-height: 1.2em;
+        }
+
+        .recent-items .card {
+            flex: 0 0 auto;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+        }
     </style>
 </head>
 
 <body>
-
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">MiTienda</a>
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="gghdbh.jpg" alt="Logo" height="40" class="me-2" href="index.html">
+                Crochetlandia
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Productos
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Ropa</a></li>
-                            <li><a class="dropdown-item" href="#">Electrónica</a></li>
-                            <li><a class="dropdown-item" href="#">Hogar</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="animales.html">Animales</a></li>
+                            <li><a class="dropdown-item" href="halloween.html">Halloween</a></li>
+                            <li><a class="dropdown-item" href="navidad.html">Navidad</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Ver todas las categorías</a></li>
+                            <li><a class="dropdown-item" href="todasCat.html">Ver todas las categorías</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="carrito.html">
+                            🛒 Carrito
+                            <span id="cart-count"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Carrusel -->
-    <div id="carouselExampleFade" class="carousel slide carousel-fade">
+    <div id="promoCarousel" class="carousel slide carousel-custom" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="prom1.png" class="d-block w-100" alt="...">
+                <img src="promos/promo1.png" class="d-block w-100" alt="Promoción 1">
             </div>
             <div class="carousel-item">
-                <img src="prom2.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="prom3.png" class="d-block w-100" alt="...">
+                <img src="promos/promo2.png" class="d-block w-100" alt="Promoción 2">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Siguiente</span>
         </button>
     </div>
+
 
     <!-- Vistos recientemente -->
     <div class="container mt-5">
         <h4>Vistos recientemente</h4>
         <div class="slider-container">
-            <div class="slider-controls">
-                <button class="slider-btn" onclick="scrollRecent(-1)">&#10094;</button>
-                <button class="slider-btn" onclick="scrollRecent(1)">&#10095;</button>
-            </div>
             <div id="recentScroll" class="recent-items">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://vadeamigurumis.com/static/imgs/amigurumis/pollo.jpg" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img src="https://vadeamigurumis.com/static/imgs/amigurumis/pollo.jpg" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img src="https://vadeamigurumis.com/static/imgs/amigurumis/pollo.jpg" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <!-- Agrega más items si lo deseas -->
+
             </div>
         </div>
     </div>
@@ -159,7 +169,38 @@
             const scrollAmount = 220;
             container.scrollLeft += direction * scrollAmount;
         }
+
+        // Mostrar productos vistos recientemente
+        function mostrarVistos() {
+            const container = document.getElementById('recentScroll');
+            const vistos = JSON.parse(localStorage.getItem("vistos")) || [];
+
+            container.innerHTML = "";
+
+            for (const prod of vistos) {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.style.width = "18rem";
+
+                card.innerHTML = `
+                <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+                <div class="card-body">
+                    <a href="producto.html?id=${prod.id}&cat=${prod.categoria}" class="btn btn-primary ver-articulo">Ver producto</a>
+                </div>
+            `;
+                container.appendChild(card);
+            }
+        }
+
+        mostrarVistos();
+
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const cartCount = document.getElementById('cart-count');
+        if (cartCount) {
+            cartCount.textContent = carrito.length;
+        }
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
